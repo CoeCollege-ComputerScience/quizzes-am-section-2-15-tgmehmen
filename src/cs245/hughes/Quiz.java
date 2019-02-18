@@ -1,10 +1,11 @@
 package cs245.hughes;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Quiz {
     private ArrayList<QuizQuestion> theQuiz;
-    private int numCorrect;
+
 
     public Quiz() {
         theQuiz = new ArrayList<QuizQuestion>();
@@ -14,19 +15,17 @@ public class Quiz {
         theQuiz.add(q);
     }
 
-    public void takeQuiz(){
-        for (QuizQuestion q:theQuiz){
-            q.askQuestion();
-        }
-    }
-
-    public float grade(){
-        numCorrect = 0;
-        for (QuizQuestion q: theQuiz){
-            if (q.isCorrect()){
+    public float takeQuiz() {
+        Scanner scan = new Scanner(System.in);
+        String studentAnswer;
+        int numCorrect = 0;
+        for (QuizQuestion q : theQuiz) {
+            q.displayQuestion();
+            studentAnswer = scan.nextLine();
+            if (q.isCorrect(studentAnswer)) {
                 numCorrect++;
             }
         }
-        return (float)numCorrect/theQuiz.size();
+        return (float) numCorrect / theQuiz.size();
     }
 }
